@@ -1,0 +1,111 @@
+<clr-modal
+  [(clrModalOpen)]="openAddNewModal"
+  [clrModalClosable]="false"
+  clrModalSize="lg"
+>
+  <h3 class="modal-title">
+    {{ isEdit ? "Edit Reportee" : "Add New Reportee" }}
+  </h3>
+
+  <div class="modal-body">
+    <p>
+      Add a new employee who will report directly to this person. Provide
+      details like name, designation, email and phone to create their profile in
+      the organization chart.
+    </p>
+
+    <form
+      clrForm
+      class="clr-form clr-form-horizontal"
+      [formGroup]="reporteeForm"
+    >
+      <p class="clr-row">
+        <span class="clr-control-label manager-label">Manager Name</span>
+        <span class="clr-control-container manager-value">{{
+          isEdit ? superviser.managerName : superviser.name
+        }}</span>
+      </p>
+
+      <clr-input-container>
+        <label class="clr-required-mark">Employee Name</label>
+        <input
+          clrInput
+          fullwidth
+          type="text"
+          formControlName="name"
+          autocomplete="false"
+        />
+        <clr-control-error *clrIfError="'required'"
+          >This field is required</clr-control-error
+        >
+        <clr-control-error *clrIfError="'minlength'"
+          >Not long enough</clr-control-error
+        >
+        <clr-control-error *clrIfError="'maxlength'"
+          >Too long</clr-control-error
+        >
+      </clr-input-container>
+      <clr-select-container>
+        <label class="clr-required-mark">Designation</label>
+        <select clrSelect formControlName="designation">
+          <option value="Engineering Manager">Engineering Manager</option>
+          <option value="Engineering Lead">Engineering Lead</option>
+          <option value="Director">Director</option>
+          <option value="VP">VP</option>
+          <option value="Project Manager">Project Manager</option>
+          <option value="Software Engineer">Software Engineer</option>
+        </select>
+        <clr-control-error *clrIfError="'required'"
+          >This field is required</clr-control-error
+        >
+      </clr-select-container>
+
+      <clr-input-container>
+        <label class="clr-required-mark">Email ID</label>
+        <input
+          clrInput
+          type="text"
+          formControlName="email"
+          autocomplete="false"
+        />
+        <clr-control-error *clrIfError="'required'"
+          >This field is required</clr-control-error
+        >
+        <clr-control-error *clrIfError="'email'"
+          >Invalid email id</clr-control-error
+        >
+      </clr-input-container>
+      <clr-input-container>
+        <label class="clr-required-mark">Phone Number</label>
+        <input
+          clrInput
+          type="text"
+          formControlName="phone"
+          autocomplete="false"
+        />
+        <clr-control-error *clrIfError="'required'"
+          >This field is required</clr-control-error
+        >
+        <clr-control-error *clrIfError="'invalidphonenumber'"
+          >Invalid phone number</clr-control-error
+        >
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="close()" class="btn btn-outline" type="button">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      type="button"
+      [disabled]="!reporteeForm.valid"
+      (click)="onSubmit()"
+    >
+      {{ isEdit ? "Edit Reportee" : "Add Reportee" }}
+    </button>
+  </div>
+</clr-modal>
+
+<div class="modal-backdrop" aria-hidden="true"></div>

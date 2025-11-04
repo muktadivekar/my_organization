@@ -1,0 +1,61 @@
+<clr-dropdown [clrCloseMenuOnItemClick]="true">
+  <button
+    clrDropdownTrigger
+    class="action-item btn-icon"
+    aria-label="Dropdown demo button"
+  >
+    <cds-icon
+      shape="ellipsis-vertical"
+      size="sm"
+      style="fill: white"
+    ></cds-icon>
+  </button>
+  <clr-dropdown-menu *clrIfOpen>
+    <button
+      clrDropdownItem
+      class="action-item"
+      (click)="openAddNewModal = true"
+    >
+      Add Reportee
+    </button>
+    <button clrDropdownItem class="action-item" (click)="openEditModal()">
+      Edit Details
+    </button>
+    <button
+      clrDropdownItem
+      class="action-item"
+      (click)="openDeleteModal = true"
+    >
+      Delete Employee
+    </button>
+    <button
+      clrDropdownItem
+      class="action-item"
+      (click)="openUpdateSuperviserModal = true"
+    >
+      Change Reporting Line
+    </button>
+  </clr-dropdown-menu>
+</clr-dropdown>
+
+<app-add-new-employee-modal
+  [superviser]="employee!"
+  [openAddNewModal]="openAddNewModal"
+  [isEdit]="isEdit"
+  *ngIf="openAddNewModal"
+  (onClose)="closeAddEditModal()"
+/>
+
+<app-delete-employee-modal
+  *ngIf="openDeleteModal"
+  [openDeleteModal]="openDeleteModal"
+  [employee]="employee!"
+  (onClose)="openDeleteModal = false"
+/>
+
+<app-change-manager-modal
+  *ngIf="openUpdateSuperviserModal"
+  [openUpdateSuperviserModal]="openUpdateSuperviserModal"
+  [employee]="employee!"
+  (onClose)="openUpdateSuperviserModal = false"
+/>

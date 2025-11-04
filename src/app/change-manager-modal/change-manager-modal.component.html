@@ -1,0 +1,51 @@
+<clr-modal
+  [(clrModalOpen)]="openUpdateSuperviserModal"
+  [clrModalClosable]="false"
+  clrModalSize="lg"
+>
+  <h3 class="modal-title">Add New Reportee</h3>
+  <div class="modal-body">
+    <p>
+      Reassign this employee to report to a new manager. Select the desired
+      manager from the available options to update the reporting hierarchy in
+      the organization chart.
+    </p>
+
+    <form clrForm class="clr-form clr-form-horizontal" [formGroup]="inputForm">
+      <p class="clr-row">
+        <span class="clr-control-label manager-label">Employee Name</span>
+        <span class="clr-control-container manager-value">{{
+          employee.name
+        }}</span>
+      </p>
+
+      <clr-select-container>
+        <label class="clr-required-mark">Manager Name</label>
+        <select clrSelect formControlName="managerId">
+          @for (e of employeeList; track e.id) { @if (e.id !== employee.id ){
+          <option [value]="e.id">{{ e.name }}</option>
+          } }
+        </select>
+        <clr-control-error *clrIfError="'required'"
+          >This field is required</clr-control-error
+        >
+      </clr-select-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="close()" class="btn btn-outline" type="button">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      type="button"
+      [disabled]="!inputForm.valid"
+      (click)="onSubmit()"
+    >
+      Change Reporting
+    </button>
+  </div>
+</clr-modal>
+
+<div class="modal-backdrop" aria-hidden="true"></div>

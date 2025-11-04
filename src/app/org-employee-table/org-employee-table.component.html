@@ -1,0 +1,41 @@
+<clr-datagrid>
+  <clr-dg-column style="width: 50px !important" />
+  <clr-dg-column class="left">Employee Name</clr-dg-column>
+  <clr-dg-column class="left">Employee Id</clr-dg-column>
+  <clr-dg-column class="left">Designation</clr-dg-column>
+  <clr-dg-column class="left">Email</clr-dg-column>
+  <clr-dg-column class="left">Phone</clr-dg-column>
+  <clr-dg-column class="left">Manager</clr-dg-column>
+
+  <clr-dg-row
+    *clrDgItems="let employee of employeeArray"
+    [clrDgItem]="employee"
+  >
+    <clr-dg-cell style="width: 50px !important" class="clr-dg-action-overflow">
+      <app-employee-context-menu
+        [employee]="employee"
+        iconShape="ellipsis-vertical"
+      />
+    </clr-dg-cell>
+    <clr-dg-cell class="left">
+      <a [routerLink]="['/employees/' + employee.id]">
+        {{ employee.name }}
+      </a>
+    </clr-dg-cell>
+    <clr-dg-cell class="left">{{ employee.id }}</clr-dg-cell>
+    <clr-dg-cell class="left">{{ employee.designation }}</clr-dg-cell>
+    <clr-dg-cell class="left">{{ employee.email }}</clr-dg-cell>
+    <clr-dg-cell class="left">{{ employee.phone }}</clr-dg-cell>
+    <clr-dg-cell class="left">{{ employee.managerName ?? "-" }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"
+        >Employees per page</clr-dg-page-size
+      >
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+      {{ pagination.totalItems }} Employees
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

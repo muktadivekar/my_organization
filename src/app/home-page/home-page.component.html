@@ -1,0 +1,32 @@
+<clr-main-container>
+  <header class="header-6">
+    <cds-icon
+      class="branding-icon"
+      shape="internet-of-things"
+      solid="true"
+    ></cds-icon>
+    <div class="branding">Hierarchical Organization Chart</div>
+  </header>
+  <clr-tabs>
+    <clr-tab>
+      <button clrTabLink>
+        <cds-icon shape="users" solid="true"></cds-icon>
+        Graph view
+      </button>
+
+      <clr-tab-content *clrIfActive>
+        <app-org-hierarchy-graph-view />
+      </clr-tab-content>
+    </clr-tab>
+
+    <clr-tab>
+      <button clrTabLink>
+        <cds-icon shape="table"></cds-icon>
+        Grid View
+      </button>
+      <clr-tab-content *clrIfActive>
+        <app-org-employee-table />
+      </clr-tab-content>
+    </clr-tab>
+  </clr-tabs>
+</clr-main-container>

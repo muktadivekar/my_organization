@@ -1,0 +1,36 @@
+<clr-modal
+  [(clrModalOpen)]="openDeleteModal"
+  [clrModalClosable]="false"
+  clrModalSize="md"
+>
+  <h3 class="modal-title">Delete Reportee</h3>
+  <div class="modal-body">
+    <p>
+      Deleting this employee will reassign all their direct reportees to the
+      employees's manager. Confirm this action to remove the employees from the
+      organization chart and update the reporting hierarchy accordingly.
+    </p>
+    <p class="clr-row">
+      <span class="clr-control-label employee-label">Employee Name</span>
+      <span class="clr-control-container employee-value">{{
+        employee.name
+      }}</span>
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button (click)="close()" class="btn btn-outline" type="button">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      type="button"
+      (click)="onSubmit()"
+    >
+      Delete
+    </button>
+  </div>
+</clr-modal>
+
+<div class="modal-backdrop" aria-hidden="true"></div>
